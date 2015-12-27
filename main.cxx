@@ -13,6 +13,16 @@ void printEvent(input_event evt);
 
 int main(int argc, char* argv[]) {
 
+  // File variables
+  int fd=0;
+  const size_t eventSize = sizeof(input_event);
+  input_event buffer;
+  ssize_t nbytes=0;
+
+  // Event variables
+  __s32 currentEventValue = 0;
+  __s32 lastEventValue = 0;
+
   // Program options
   std::string eventDevice("");
   std::string cmdP("");
@@ -50,16 +60,11 @@ int main(int argc, char* argv[]) {
   }
 
   // Open the event device
-   int fd=0;
-   const size_t eventSize = sizeof(input_event);
-   input_event buffer;
-   ssize_t nbytes=0;
-
-   fd = open(eventDevice.c_str(), O_RDONLY);
-   if ( fd < 0 ) {
-     std::cout << "Unable to open device: " << eventDevice << std::endl;
-     return -1;
-   }
+  fd = open(eventDevice.c_str(), O_RDONLY);
+  if ( fd < 0 ) {
+    std::cout << "Unable to open device: " << eventDevice << std::endl;
+    return -1;
+  }
 
   //read data from the descriptors in a loop. Terminate
   //when an error occurs or when either pipe has been closed
@@ -76,12 +81,24 @@ int main(int argc, char* argv[]) {
                 << nbytes << " (rec) vs. "
                 << eventSize << " (exp)" << std::endl;
     } else { // process the buffer
+      lastEventValue = currentEventValue;
+      currentEventValue = buffer.value;
+
       if (debug) {
         std::cout << "---------- DEBUG START: input_event ----------" << std::endl;
         printEvent(buffer);
         std::cout << "---------- DEBUG END: input_event ----------" << std::endl;
       }
 
+      if (lastEventValue == EV_KEY && currentEventValue == EV_SYN) {
+        if (debug) {
+          std::cout << "---------- DEBUG: Press ----------" << std::endl;
+        }
+      } else if (lastEventValue == EV_SYN && currentEventValue == EV_SYN) {
+        if (debug) {
+          std::cout << "---------- DEBUG: Release ----------" << std::endl;
+        }
+      }
 
     }
   }
@@ -107,7 +124,6 @@ void printEvent(input_event evt) {
     case(EV_CNT)      : valueStr = "EV_CNT"; break;
     default           : valueStr = "NO STRING FOUND"; break;
   }
-
 
   std::cout <<
       "time.tv_sec: " << evt.time.tv_sec << std::endl <<
