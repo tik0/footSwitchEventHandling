@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+# Project files
+.cproject
+.project
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+footSwitchEventHandling
