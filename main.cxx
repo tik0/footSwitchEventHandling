@@ -1,6 +1,10 @@
 #include <linux/input.h>
 #include <iostream>
 
+// Execute external programs
+#include <stdlib.h>
+#include <thread>
+
 // Handle program options
 #include <boost/program_options.hpp>
 
@@ -10,6 +14,7 @@
 #include <fcntl.h>
 
 void printEvent(input_event evt);
+void executeProgram(const std::string program);
 
 int main(int argc, char* argv[]) {
 
@@ -92,11 +97,25 @@ int main(int argc, char* argv[]) {
 
       if (lastEventValue == EV_KEY && currentEventValue == EV_SYN) {
         if (debug) {
-          std::cout << "---------- DEBUG: Press ----------" << std::endl;
+          std::cout << "DEBUG: Press" << std::endl;
+        }
+        if (!cmdP.empty()) {
+          if (debug) {
+            std::cout << "DEBUG: Execute " << cmdP << std::endl;
+          }
+          std::thread t(&executeProgram, cmdP);
+          t.detach();
         }
       } else if (lastEventValue == EV_SYN && currentEventValue == EV_SYN) {
         if (debug) {
-          std::cout << "---------- DEBUG: Release ----------" << std::endl;
+          std::cout << "DEBUG: Release" << std::endl;
+        }
+        if (!cmdP.empty()) {
+          if (debug) {
+            std::cout << "DEBUG: Execute " << cmdR << std::endl;
+          }
+          std::thread t(&executeProgram, cmdR);
+          t.detach();
         }
       }
 
@@ -132,4 +151,8 @@ void printEvent(input_event evt) {
       "code: " << evt.code << std::endl <<
       "value: " << evt.value << " (" << valueStr << ")" << std::endl <<
   std::flush;
+}
+
+void executeProgram(const std::string program) {
+  system(program.c_str());
 }

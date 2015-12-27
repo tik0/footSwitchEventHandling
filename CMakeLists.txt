@@ -22,6 +22,7 @@ add_executable (
 target_link_libraries (
     "${PROJECT_NAME}"
     ${Boost_LIBRARIES}
+    pthread
 )
 
 SET ( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -O0 -g -std=c++11" )
