@@ -1,6 +1,14 @@
 # footSwitchEventHandling
 Handle the press/release inputs of a foot switch and map them to a command
 
+## Clone
+
+Clone this project into your `/opt` folder
+
+```bash
+git clone https://github.com/tik0/footSwitchEventHandling
+```
+
 ## Compile Project
 
 ### Create Project
@@ -34,3 +42,10 @@ Pressed: Hello World
 Released: Bye World
 ...
 ```
+
+## Install
+
+1. Install udev rule and and make it available `sudo reload udev`
+2. Disable the RDing devices for X using corntab (cannot be done by udev, because X is to slow)
+2.1 Type `crontab -e`
+2.2. Add `* * * * * /opt/footSwitchEventHandling/scripts/disableRDing.sh`
