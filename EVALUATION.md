@@ -142,18 +142,18 @@ Device 'RDing FootSwitch1F1.':
         Evdev Drag Lock Buttons (280):  0
 ```
 
-When we want to work with the events, we should disable the device:
+When we want to work with the events, we should disable the device so that no more characters appear if someone presses the switch:
 ```bash
 bash> xinput --disable 9
 ```
 
-
-
-
+# Working with the event device
 
 Pressing the Switch for a few seconds:
 
-Press events:
+```bash
+bash> footSwitchEventHandling --debug --eventDevice /dev/input/event4
+...
 ---------- DEBUG START: input_event ----------
 time.tv_sec: 1451225158
 time.tv_usec: 261641
@@ -176,7 +176,7 @@ code: 0
 value: 0 (EV_SYN)
 ---------- DEBUG END: input_event ----------
 
-Repetition events:
+# Repetition events:
 ---------- DEBUG START: input_event ----------
 time.tv_sec: 1451225158
 time.tv_usec: 512841
@@ -191,7 +191,7 @@ type: 0
 code: 0
 value: 1 (EV_KEY)
 ---------- DEBUG END: input_event ----------
-.........................Repetition of events.........................................
+# .........................Repetition of events.........................................
 ---------- DEBUG START: input_event ----------
 time.tv_sec: 1451225158
 time.tv_usec: 764844
@@ -207,7 +207,7 @@ code: 0
 value: 1 (EV_KEY)
 ---------- DEBUG END: input_event ----------
 
-Release events:
+# Release events:
 ---------- DEBUG START: input_event ----------
 time.tv_sec: 1451225158
 time.tv_usec: 765638
@@ -229,9 +229,12 @@ type: 0
 code: 0
 value: 0 (EV_SYN)
 ---------- DEBUG END: input_event ----------
+```
 
+We can investigate that we receive tupples and tripples, grouped by their `time`field.
 
-We can investigate that we receive tupples and tripples, grouped by their "time".
-Press tripple: (458757, EV_KEY, EV_SYN)
-Repetition tupple: (EV_REL, EV_KEY)
-Release tupple: (458757, EV_SYN, EV_SYN)
+Press tripple: `(458757, EV_KEY, EV_SYN)`
+
+Repetition tupple: `(EV_REL, EV_KEY)`
+
+Release tupple: `(458757, EV_SYN, EV_SYN)`
