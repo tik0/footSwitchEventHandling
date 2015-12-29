@@ -45,7 +45,5 @@ Released: Bye World
 
 ## Install
 
-1. Install udev rule and and make it available `sudo reload udev`
-2. Disable the RDing devices for X using corntab (cannot be done by udev, because X is to slow)
-2.1 Type `crontab -e`
-2.2. Add `* * * * * /opt/footSwitchEventHandling/scripts/disableRDing.sh`
+1. Install udev rule from the `etc` folder and and make it available `sudo reload udev`
+2. Install the X11 config from the `etc` folder to disable the RDing devices
