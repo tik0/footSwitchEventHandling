@@ -1,3 +1,28 @@
+# Helpful links
+
+## Linux Input driver
+
+Linux Input drivers: https://www.kernel.org/doc/Documentation/input/input.txt
+
+evdev: https://en.wikipedia.org/wiki/Evdev
+
+Work with input drivers: http://stackoverflow.com/questions/15949163/read-from-dev-input
+
+## udev
+
+udev: https://wiki.ubuntuusers.de/udev
+
+DebuggingUdev: https://wiki.ubuntu.com/DebuggingUdev
+
+Run a script when udev detects a device: http://askubuntu.com/questions/25071/how-to-run-a-script-when-a-specific-flash-drive-is-mounted
+
+How to run long time process on Udev event: http://unix.stackexchange.com/questions/56243/how-to-run-long-time-process-on-udev-event
+
+## X11
+
+Input Configuration with xinput: https://wiki.ubuntu.com/X/Config/Input
+
+
 # Inspect the device
 
 ## Inspect the /dev/input folder
