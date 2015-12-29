@@ -1,1 +1,6 @@
-ACTION=="add", ATTRS{idVendor}=="0c45", ATTRS{idProduct}=="7403", RUN+="/opt/footSwitchEventHandling/scripts/hotplug.sh"
+#Rule for the detection of the RDing foot switch
+ACTION!="add", GOTO="NOTHING_TO_DO"
+
+ENV{DEVNAME}=="/dev/input/event*", ENV{ID_BUS}=="usb", ENV{SUBSYSTEM}=="input", ATTRS{idVendor}=="0c45", ATTRS{idProduct}=="7403", RUN+="/opt/footSwitchEventHandling/scripts/hotplug.sh"
+
+LABEL="NOTHING_TO_DO"
