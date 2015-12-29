@@ -46,4 +46,4 @@ Released: Bye World
 ## Install
 
 1. Install udev rule from the `etc` folder and and make it available `sudo reload udev`
-2. Install the X11 config from the `etc` folder to disable the RDing devices
+2. Install the X11 config from the `etc` folder to disable the RDing devices, restart X later
