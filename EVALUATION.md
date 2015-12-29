@@ -153,7 +153,8 @@ Pressing the Switch for a few seconds:
 
 ```bash
 bash> footSwitchEventHandling --debug --eventDevice /dev/input/event4
-...
+
+# Press events
 ---------- DEBUG START: input_event ----------
 time.tv_sec: 1451225158
 time.tv_usec: 261641
