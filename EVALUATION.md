@@ -186,6 +186,46 @@ When we want to work with the events, we should disable the device so that no mo
 bash> xinput --disable 9
 ```
 
+## Investigate information via udevadm
+
+```bash
+bash> udevadm  info /dev/input/event4
+P: /devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.0/input/input51/event4
+N: input/event4
+S: input/by-id/usb-RDing_FootSwitch1F1.-event-mouse
+S: input/by-path/pci-0000:00:14.0-usb-0:2:1.0-event-mouse
+E: DEVLINKS=/dev/input/by-id/usb-RDing_FootSwitch1F1.-event-mouse /dev/input/by-path/pci-0000:00:14.0-usb-0:2:1.0-event-mouse
+E: DEVNAME=/dev/input/event4
+E: DEVPATH=/devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.0/input/input51/event4
+E: ID_BUS=usb
+E: ID_INPUT=1
+E: ID_INPUT_KEY=1
+E: ID_INPUT_KEYBOARD=1
+E: ID_INPUT_MOUSE=1
+E: ID_MODEL=FootSwitch1F1.
+E: ID_MODEL_ENC=FootSwitch1F1.
+E: ID_MODEL_ID=7403
+E: ID_PATH=pci-0000:00:14.0-usb-0:2:1.0
+E: ID_PATH_TAG=pci-0000_00_14_0-usb-0_2_1_0
+E: ID_REVISION=0001
+E: ID_SERIAL=RDing_FootSwitch1F1.
+E: ID_TYPE=hid
+E: ID_USB_DRIVER=usbhid
+E: ID_USB_INTERFACES=:030101:030102:
+E: ID_USB_INTERFACE_NUM=00
+E: ID_VENDOR=RDing
+E: ID_VENDOR_ENC=RDing
+E: ID_VENDOR_ID=0c45
+E: MAJOR=13
+E: MINOR=68
+E: SUBSYSTEM=input
+E: UDEV_LOG=6
+E: USEC_INITIALIZED=959814658
+E: XKBLAYOUT=de
+E: XKBMODEL=pc105
+E: XKBOPTIONS=terminate:ctrl_alt_bksp
+```
+
 # Working with the event device
 
 Pressing the Switch for a few seconds:
