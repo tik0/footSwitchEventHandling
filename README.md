@@ -32,7 +32,7 @@ cmake -G"Eclipse CDT4 - Ninja" -DCMAKE_BUILD_TYPE=release .
 
 Get the event device and execute the program for a test as follows:
 ```bash
-sudo ./footSwitchEventHandling -e /dev/input/event16 -p ${PWD}/testPress.sh -r ${PWD}/testRelease.sh
+sudo ./footSwitchEventHandling -e /dev/input/event16 -p ${PWD}/scripts/testPress.sh -r ${PWD}/scripts/testRelease.sh
 # Output
 Pressed: Hello World
 Released: Bye World
