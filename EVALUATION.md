@@ -18,6 +18,45 @@ Run a script when udev detects a device: http://askubuntu.com/questions/25071/ho
 
 How to run long time process on Udev event: http://unix.stackexchange.com/questions/56243/how-to-run-long-time-process-on-udev-event
 
+### Multiple execution problem
+
+When a device is plugged in, a whole device tree is loaded.
+This can be seen if you type in `udevadm monitor --udev` and plug in any device.
+Just by plugging in the RDing device, eleven (11) devices are added:
+
+```bash
+bash> udevadm monitor --udev
+monitor will print the received events for:
+UDEV - the event which udev sends out after rule processing
+
+UDEV  [25636.128802] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1 (usb)
+UDEV  [25636.130740] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0 (usb)
+UDEV  [25636.134173] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.1 (usb)
+UDEV  [25636.135170] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0/0003:0C45:7403.0060 (hid)
+UDEV  [25636.135937] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0/input/input64 (input)
+UDEV  [25636.136139] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0/0003:0C45:7403.0060/hidraw/hidraw2 (hidraw)
+UDEV  [25636.137241] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0/input/input64/mouse3 (input)
+UDEV  [25636.137696] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.1/usbmisc/hiddev1 (usbmisc)
+UDEV  [25636.137792] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.1/0003:0C45:7403.0061 (hid)
+UDEV  [25636.141042] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.1/0003:0C45:7403.0061/hidraw/hidraw3 (hidraw)
+UDEV  [25636.229755] add      /devices/pci0000:00/0000:00:14.0/usb2/2-1/2-1:1.0/input/input64/event5 (input)
+```
+
+Now comes the problem:
+If the udev rule is to generic, it will run eleven (11) times as well.
+Thus, we have to find unique identifier for the device we are waiting for.
+
+E.g. we only want to to run our udev rule when the `/dev/input/event4` device comes up.
+Then we first have to investigate all its properties via `udevadm  info /dev/input/event4`.
+
+### Multiple execution problem: Links
+
+udev rule question: http://ubuntuforums.org/showthread.php?t=1273548
+
+Why does my udev rule run several times?: http://askubuntu.com/questions/423099/why-does-my-udev-rule-run-several-times
+
+Regular expression in udev rules: https://www-uxsup.csx.cam.ac.uk/pub/doc/suse/suse9.2/suselinux-adminguide_en/ch19s03.html
+
 ## X11
 
 xinput: http://linux.die.net/man/1/xinput
