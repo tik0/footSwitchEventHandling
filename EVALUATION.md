@@ -20,7 +20,21 @@ How to run long time process on Udev event: http://unix.stackexchange.com/questi
 
 ## X11
 
+xinput: http://linux.die.net/man/1/xinput
+
 Input Configuration with xinput: https://wiki.ubuntu.com/X/Config/Input
+
+Remapping mouse buttons: http://wiki.mbirth.de/know-how/software/linux/remapping-mouse-buttons.html
+
+Cool Tricks with Xinput Device: http://www.linux.org/threads/cool-tricks-with-xinput-device.6178/
+
+Persistent device configuration(1): https://wiki.archlinux.org/index.php/Mouse_acceleration
+
+Persistent device configuration(2): https://fedoraproject.org/wiki/Input_device_configuration
+
+## Misc
+
+How do I compare binary files in Linux (using `xxd`): http://superuser.com/questions/125376/how-do-i-compare-binary-files-in-linux
 
 
 # Inspect the device
