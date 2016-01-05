@@ -165,6 +165,57 @@ hidraw2          network_latency     ram6   tty10     tty30  tty50  ttyS11     t
 hidraw3          network_throughput  ram7   tty11     tty31  tty51  ttyS12     ttyS4   vcs7
 ```
 
+## dbus
+
+Control Your Linux Desktop with D-Bus: http://www.linuxjournal.com/article/10455?page=0,0
+
+Attach to existing DBUS session over SSH: http://ubuntuforums.org/showthread.php?t=1059023
+
+dbus specifications: http://dbus.freedesktop.org/doc/dbus-specification.html
+
+Run `dbus-send` in a remote system: http://unix.stackexchange.com/questions/153291/run-dbus-send-in-a-remote-system
+
+Tool for viewing available DBUS messages I can send to an application: http://askubuntu.com/questions/11453/tool-for-viewing-available-dbus-messages-i-can-send-to-an-application
+
+kde Development/Tutorials/D-Bus/Introduction: https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction
+
+ubuntu dbus: https://wiki.ubuntuusers.de/D-Bus
+
+### Examine the dbus
+
+```bash
+bash> qdbus org.freedesktop.PowerManagement \
+>             /org/freedesktop/PowerManagement \
+>             org.freedesktop.PowerManagement.Suspend
+
+bash> qdbus org.freedesktop.PowerManagement \
+>             /org/freedesktop/PowerManagement
+method bool org.freedesktop.PowerManagement.CanHibernate()
+signal void org.freedesktop.PowerManagement.CanHibernateChanged(bool can_hibernate)
+method bool org.freedesktop.PowerManagement.CanHybridSuspend()
+signal void org.freedesktop.PowerManagement.CanHybridSuspendChanged(bool can_hybrid_suspend)
+method bool org.freedesktop.PowerManagement.CanSuspend()
+signal void org.freedesktop.PowerManagement.CanSuspendChanged(bool can_suspend)
+method bool org.freedesktop.PowerManagement.GetPowerSaveStatus()
+method void org.freedesktop.PowerManagement.Hibernate()
+signal void org.freedesktop.PowerManagement.PowerSaveStatusChanged(bool save_power)
+method void org.freedesktop.PowerManagement.Suspend()
+method bool org.freedesktop.PowerManagement.Inhibit.HasInhibit()
+signal void org.freedesktop.PowerManagement.Inhibit.HasInhibitChanged(bool has_inhibit)
+method uint org.freedesktop.PowerManagement.Inhibit.Inhibit(QString application, QString reason)
+method void org.freedesktop.PowerManagement.Inhibit.UnInhibit(uint cookie)
+method QDBusVariant org.freedesktop.DBus.Properties.Get(QString interface_name, QString property_name)
+method QVariantMap org.freedesktop.DBus.Properties.GetAll(QString interface_name)
+method void org.freedesktop.DBus.Properties.Set(QString interface_name, QString property_name, QDBusVariant value)
+method QString org.freedesktop.DBus.Introspectable.Introspect()
+method QString org.freedesktop.DBus.Peer.GetMachineId()
+method void org.freedesktop.DBus.Peer.Ping()
+
+bash> qdbus org.freedesktop.PowerManagement /org/freedesktop/PowerManagement org.freedesktop.PowerManagement.CanSuspend
+true
+```
+
+
 # xinput
 
 `xinput` shows the device as mouse "RDing FootSwitch1F1.":
