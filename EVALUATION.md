@@ -1,5 +1,15 @@
 # Helpful links
 
+## Footswitch
+
+LinuxMusicians (Use Windows Setup to set the key of the device): https://linuxmusicians.com/viewtopic.php?f=6&t=7953
+
+scythe Footswitch: http://www.scythe-eu.com/en/products/pc-accessory/usb-foot-switch-ii.html
+
+vdr-portal: http://www.vdr-portal.de/board19-verschiedenes/board52-andere-hardware/p1232474-usb-pedal-event-direkt-lesen-unter-ubuntu-14-10/
+
+Andoer USB Game Fußschalter: http://www.amazon.de/Andoer-Fu%C3%9Fschalter-Keyboard-Aktion-Schalter/dp/B00DG0KQBE/ref=sr_1_4?ie=UTF8&qid=1452072072&sr=8-4&keywords=Fu%C3%9Fpedal
+
 ## Linux Input driver
 
 Linux Input drivers: https://www.kernel.org/doc/Documentation/input/input.txt
