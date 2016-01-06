@@ -1,1 +1,1 @@
-date > /tmp/R2myDate
+mpg321 -o alsa -a hw:1,0 /opt/footSwitchEventHandling/scripts/BaDumTss.mp3
