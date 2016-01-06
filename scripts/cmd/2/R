@@ -1,1 +1,1 @@
-mpg321 -o alsa -a hw:1,0 /opt/footSwitchEventHandling/scripts/BaDumTss.mp3
+sudo -u \#1000 cvlc --alsa-audio-device hw:1,0 --play-and-exit /opt/footSwitchEventHandling/scripts/BaDumTss.mp3
