@@ -7,11 +7,35 @@ ROOT="/opt/footSwitchEventHandling"
 SCRIPTS_FOLDER="${ROOT}/scripts/cmd"
 PROG="${ROOT}/footSwitchEventHandling"
 ID_SERIAL="RDing_FootSwitch1F1."
+LOCKFILE="/tmp/$(basename ${0}).lock"
+
+
+lock () {
+LOCK_SUCCESS="0";
+while [[ ${LOCK_SUCCESS} == "0" ]]; do
+  mkdir "${LOCKFILE}"; LOCKVALUE=$?
+  if [[ "${LOCKVALUE}" == "0" ]]; then    # directory did not exist, but was created successfully
+    echo >&2 "successfully acquired lock: ${LOCKFILE}"
+    LOCK_SUCCESS="1"
+  else    # failed to create the directory, presumably because it already exists
+    echo >&2 "cannot acquire lock on ${LOCKFILE}, wait to be freed"
+    sleep 1
+  fi
+done
+}
+
+unlock () {
+rm -rf ${LOCKFILE}
+}
+
 
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
+
+# lock any other hotplug.sh process
+lock
 
 # Get a free RDing event device
 DEV_OPENED_ALREADY=0
@@ -73,8 +97,13 @@ echo -e "cmdP: ${cmdP}"
 echo -e "cmdR: ${cmdR}\n"
 
 # Finally, run the program
+EXIT_CODE="1"
 if [[ ${DEV_OPENED_ALREADY} == "0" && ${SCRIPT_OPENED_ALREADY} == "0" ]]; then
   echo "${PROG} --eventDevice ${INP_DEV_TO_OPEN} --cmdP \"${cmdP}\" --cmdR \"${cmdR}\"" | at now
-  exit 0
+  EXIT_CODE="0"
 fi
-exit 1
+
+# Release the other running hotplug.sh scripts
+unlock
+
+exit ${EXIT_CODE}
